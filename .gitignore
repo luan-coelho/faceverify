@@ -1,0 +1,8 @@
+.idea
+*.ipr
+*.iml
+*.iws
+/.idea
+
+.vscode
+.factorypath

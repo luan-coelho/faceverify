@@ -1,12 +1,12 @@
 package br.com.luan.resource;
 
-import dto.GenerateQRCodeDTO;
+import br.com.luan.dto.GenerateQRCodeDTO;
+import br.com.luan.service.QRCodeService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
-import service.QRCodeService;
 
 @Path("/api/qrcode")
 public class QRCodeResource {

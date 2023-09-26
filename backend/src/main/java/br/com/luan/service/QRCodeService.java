@@ -1,4 +1,4 @@
-package service;
+package br.com.luan.service;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -6,6 +6,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.InternalServerErrorException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -39,8 +40,7 @@ public class QRCodeService {
             ImageIO.write(image, "png", baos);
             return baos.toByteArray();
         } catch (Exception ignored) {
-
+            throw new InternalServerErrorException("Não foi possível gerar um QRCode");
         }
-        return null;
     }
 }

@@ -1,0 +1,41 @@
+@startuml
+
+class User {
+    - id: Long
+    - name: String
+    - email: String
+    - cpf: String
+    - password: String
+}
+
+class FacePhoto {
+    - id: Long
+}
+
+class Role {
+    - name: String
+}
+
+class PointRegistration {
+    - id: Long
+    - date: Date
+}
+
+class Point {
+    - id: Long
+    - dateTime: DateTime
+}
+
+class Device {
+    - identifier: UUID
+    - name: String
+}
+
+PointRegistration "1" *-> "*" Point
+PointRegistration "*" --> "1" User
+
+User "*" o-left-> "1" Role
+User "1" o-> "*" Device
+User "1" *-down-> "1" FacePhoto
+
+@enduml

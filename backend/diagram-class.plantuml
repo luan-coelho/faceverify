@@ -8,6 +8,11 @@ class User {
     - password: String
 }
 
+class Device {
+    - identifier: UUID
+    - name: String
+}
+
 class FacePhoto {
     - id: Long
 }
@@ -16,23 +21,25 @@ class Role {
     - name: String
 }
 
+class Event {
+    - id: Long
+    - description: String
+}
+
 class PointRegistration {
     - id: Long
-    - date: Date
+    - date: LocalDate
 }
 
 class Point {
     - id: Long
-    - dateTime: DateTime
+    - dateTime: LocalDateTime
 }
 
-class Device {
-    - identifier: UUID
-    - name: String
-}
+Event "1" *-> "*" PointRegistration
 
 PointRegistration "1" *-> "*" Point
-PointRegistration "*" --> "1" User
+PointRegistration "*" o-down-> "*" User
 
 User "*" o-left-> "1" Role
 User "1" o-> "*" Device

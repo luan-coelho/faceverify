@@ -20,11 +20,6 @@ public class Event {
     private Long id;
     @Column(name = "description")
     private String description;
-    @OneToMany
-    @JoinTable(
-            name = "event_point_registrations",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "point_registration_id")
-    )
+    @OneToMany(mappedBy = "event")
     private List<PointRegistration> pointRegistrations;
 }

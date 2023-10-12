@@ -20,4 +20,7 @@ public class Point {
     private Long id;
     @Column(name = "date_time")
     private LocalDateTime dateTime;
+    @ManyToOne
+    @JoinColumn(name = "point_registration_id")
+    private PointRegistration pointRegistration;
 }

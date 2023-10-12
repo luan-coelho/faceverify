@@ -22,18 +22,16 @@ public class PointRegistration {
     @Column(name = "point_registration_id")
     private Long id;
     private LocalDate date;
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "point_registration_users",
             joinColumns = @JoinColumn(name = "point_registration_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
-    @OneToMany
-    @JoinTable(
-            name = "point_registration_points",
-            joinColumns = @JoinColumn(name = "point_registration_id"),
-            inverseJoinColumns = @JoinColumn(name = "point_id")
-    )
+    @OneToMany(mappedBy = "pointRegistration")
     private List<Point> points;
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
 }

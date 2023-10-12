@@ -41,14 +41,16 @@ CREATE SEQUENCE point_registration_seq START 1;
 CREATE TABLE point_registration
 (
     point_registration_id BIGINT PRIMARY KEY DEFAULT nextval('point_registration_seq') NOT NULL,
-    date                  DATE                                                         NOT NULL
+    date                  DATE                                                         NOT NULL,
+    event_id              BIGINT REFERENCES event (event_id)
 );
 
 CREATE SEQUENCE point_seq START 1;
 CREATE TABLE point
 (
-    point_id  BIGINT PRIMARY KEY DEFAULT nextval('point_seq') NOT NULL,
-    date_time TIMESTAMP                                       NOT NULL
+    point_id              BIGINT PRIMARY KEY DEFAULT nextval('point_seq') NOT NULL,
+    date_time             TIMESTAMP                                       NOT NULL,
+    point_registration_id BIGINT REFERENCES point_registration (point_registration_id)
 );
 
 CREATE TABLE point_registration_users
@@ -56,18 +58,4 @@ CREATE TABLE point_registration_users
     point_registration_id BIGINT REFERENCES point_registration (point_registration_id),
     user_id               BIGINT REFERENCES tb_user (user_id),
     PRIMARY KEY (point_registration_id, user_id)
-);
-
-CREATE TABLE point_registration_points
-(
-    point_registration_id BIGINT REFERENCES point_registration (point_registration_id),
-    point_id              BIGINT REFERENCES point (point_id),
-    PRIMARY KEY (point_registration_id, point_id)
-);
-
-CREATE TABLE event_point_registrations
-(
-    event_id              BIGINT REFERENCES event (event_id),
-    point_registration_id BIGINT REFERENCES point_registration (point_registration_id),
-    PRIMARY KEY (event_id, point_registration_id)
 );

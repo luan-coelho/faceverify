@@ -1,10 +1,7 @@
 package br.com.luan.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +15,13 @@ import java.util.UUID;
 public class Device {
 
     @Id
-    private UUID identifier;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "device_seq")
+    @SequenceGenerator(name = "device_seq", sequenceName = "device_seq", allocationSize = 1)
+    @Column(name = "device_id")
+    private Long id;
     private String name;
+    @Column(name = "bluetooth_identifier")
+    private UUID bluetoothIdentifier;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")

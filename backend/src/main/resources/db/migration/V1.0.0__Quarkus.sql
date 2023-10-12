@@ -23,11 +23,13 @@ CREATE TABLE tb_user
     role_id    BIGINT                                         NULL REFERENCES role (role_id)
 );
 
+CREATE SEQUENCE device_seq START 1;
 CREATE TABLE device
 (
-    identifier UUID PRIMARY KEY NOT NULL,
-    name       VARCHAR(255)     NOT NULL,
-    user_id    BIGINT REFERENCES tb_user (user_id)
+    device_id            BIGINT PRIMARY KEY DEFAULT nextval('device_seq') NOT NULL,
+    bluetooth_identifier UUID                                             NOT NULL,
+    name                 VARCHAR(255)                                     NOT NULL,
+    user_id              BIGINT REFERENCES tb_user (user_id)
 );
 
 CREATE SEQUENCE event_seq START 1;

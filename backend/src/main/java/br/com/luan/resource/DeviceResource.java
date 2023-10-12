@@ -16,10 +16,17 @@ public class DeviceResource {
     @Inject
     DeviceService service;
 
-    @Path("/{identifier}")
+    @Path("/{id}")
     @GET
-    public Response getById(@RestPath("identifier") UUID identifier) {
-        Device device = service.findById(identifier);
+    public Response getById(@RestPath("id") Long id) {
+        Device device = service.findById(id);
+        return Response.ok(device).build();
+    }
+
+    @Path("/bluetooth-identifier/{uuid}")
+    @GET
+    public Response getByBluetoothIdentifier(@RestPath("uuid") UUID uuid) {
+        Device device = service.findByBluetoothIdentifier(uuid);
         return Response.ok(device).build();
     }
 }

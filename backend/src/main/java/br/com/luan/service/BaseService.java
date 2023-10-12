@@ -6,9 +6,8 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
-import java.util.UUID;
 
-public abstract class BaseService<T, R extends BaseRepository<T>> {
+public abstract class BaseService<T, ID, R extends BaseRepository<T, ID>> {
 
     @Inject
     R repository;
@@ -17,7 +16,7 @@ public abstract class BaseService<T, R extends BaseRepository<T>> {
         return repository.listAll();
     }
 
-    public T findById(UUID id) {
+    public T findById(ID id) {
         return repository.findByIdOptional(id).orElseThrow(() -> new NotFoundException("Resource not found by id"));
     }
 
@@ -33,7 +32,7 @@ public abstract class BaseService<T, R extends BaseRepository<T>> {
     }
 
     @Transactional
-    public void deleteById(UUID id) {
+    public void deleteById(ID id) {
         findById(id);
         repository.deleteById(id);
     }

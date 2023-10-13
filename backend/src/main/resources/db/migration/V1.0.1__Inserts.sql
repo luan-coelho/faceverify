@@ -10,4 +10,8 @@ VALUES ((SELECT last_value FROM user_seq), (SELECT last_value FROM role_seq));
 INSERT INTO device(device_id, name, bluetooth_identifier, user_id)
 VALUES (DEFAULT, 'Dispositivo do Usuário', 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', (SELECT last_value FROM user_seq));
 
+INSERT INTO event(event_id, description)
+VALUES (DEFAULT, 'Labin IV');
 
+INSERT INTO point_registration(point_registration_id, date, event_id)
+VALUES (DEFAULT, now(), (SELECT last_value FROM event_seq))

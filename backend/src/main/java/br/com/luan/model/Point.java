@@ -23,4 +23,5 @@ public class Point {
     @ManyToOne
     @JoinColumn(name = "point_registration_id")
     private PointRegistration pointRegistration;
+    private boolean validated;
 }

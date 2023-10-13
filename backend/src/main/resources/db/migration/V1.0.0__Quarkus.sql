@@ -51,6 +51,7 @@ CREATE TABLE point
 (
     point_id              BIGINT PRIMARY KEY DEFAULT nextval('point_seq') NOT NULL,
     date_time             TIMESTAMP                                       NOT NULL,
+    validated             BOOLEAN,
     point_registration_id BIGINT REFERENCES point_registration (point_registration_id)
 );
 

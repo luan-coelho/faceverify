@@ -1,4 +1,5 @@
 @startuml
+title Diagrama de classe do backend da aplicação
 
 class User {
     - id: Long
@@ -9,12 +10,20 @@ class User {
 }
 
 class Device {
+    - id: Long
     - identifier: UUID
     - name: String
 }
 
 class FacePhoto {
     - id: Long
+    - url: String
+}
+
+class StorageType {
+    + LOCAL
+    + S3
+    + OTHER
 }
 
 class Role {
@@ -36,13 +45,58 @@ class Point {
     - dateTime: LocalDateTime
 }
 
+abstract class Factor {
+    + void {abstract} validate()
+}
+
+class Environment {
+    - id: Long
+    - title: String
+    - description: String
+}
+
+class Configuration {
+    - id: Long
+}
+
+class WifiNetworkConfiguration {
+    - ssid: String
+    - ip: String
+}
+
+class FaceRecognitionFactor {
+    - id: Long
+    + void validate()
+}
+
+class GeolocationFactor {
+    - id: Long
+    + void validate()
+}
+
+class WiFiFactor {
+    - id: Long
+    + void validate()
+}
+
+Environment "1" *-> "*" Event
+Environment "1" *-down-> "*" Configuration
+Configuration "1" *-down-> "*" WifiNetworkConfiguration
 Event "1" *-> "*" PointRegistration
 
 PointRegistration "1" *-> "*" Point
 PointRegistration "*" o-down-> "*" User
+PointRegistration "*" o-> "*" Factor
+PointRegistration "*" --> "*" WifiNetworkConfiguration
+
+Factor <|-- FaceRecognitionFactor
+Factor <|-- GeolocationFactor
+Factor <|-- WiFiFactor
 
 User "*" o-left-> "*" Role
-User "1" o-> "*" Device
+User "1" o-down-> "*" Device
 User "1" *-down-> "1" FacePhoto
+
+FacePhoto "*" *-> "1" StorageType
 
 @enduml

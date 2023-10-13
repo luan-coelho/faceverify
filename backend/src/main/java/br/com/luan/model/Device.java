@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Device {
+public class Device{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "device_seq")

@@ -24,7 +24,7 @@ public class PointRegistration {
     private LocalDate date;
     @ManyToMany
     @JoinTable(
-            name = "point_registration_users",
+            name = "point_registration_user",
             joinColumns = @JoinColumn(name = "point_registration_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )

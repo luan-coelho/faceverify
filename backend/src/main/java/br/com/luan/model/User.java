@@ -28,7 +28,11 @@ public class User {
     @OneToOne
     @JoinColumn(name = "face_photo")
     private FacePhoto facePhoto;
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles;
 }

@@ -19,8 +19,7 @@ CREATE TABLE tb_user
     email      VARCHAR(255)                                   NOT NULL,
     cpf        VARCHAR(11)                                    NOT NULL,
     password   VARCHAR(255)                                   NOT NULL,
-    face_photo BIGINT                                         NULL REFERENCES face_photo (face_photo_id),
-    role_id    BIGINT                                         NULL REFERENCES role (role_id)
+    face_photo BIGINT                                         NULL REFERENCES face_photo (face_photo_id)
 );
 
 CREATE SEQUENCE device_seq START 1;
@@ -55,9 +54,16 @@ CREATE TABLE point
     point_registration_id BIGINT REFERENCES point_registration (point_registration_id)
 );
 
-CREATE TABLE point_registration_users
+CREATE TABLE point_registration_user
 (
     point_registration_id BIGINT REFERENCES point_registration (point_registration_id),
     user_id               BIGINT REFERENCES tb_user (user_id),
     PRIMARY KEY (point_registration_id, user_id)
 );
+
+CREATE TABLE user_role
+(
+    user_id BIGINT REFERENCES tb_user (user_id),
+    role_id BIGINT REFERENCES role (role_id),
+    PRIMARY KEY (user_id, role_id)
+)

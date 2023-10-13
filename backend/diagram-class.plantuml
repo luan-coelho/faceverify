@@ -41,7 +41,7 @@ Event "1" *-> "*" PointRegistration
 PointRegistration "1" *-> "*" Point
 PointRegistration "*" o-down-> "*" User
 
-User "*" o-left-> "1" Role
+User "*" o-left-> "*" Role
 User "1" o-> "*" Device
 User "1" *-down-> "1" FacePhoto
 

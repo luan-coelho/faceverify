@@ -7,21 +7,26 @@ import br.com.luan.model.User;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public record CreatePointRegistrationDTO(Long id,
+                                         Event event,
                                          LocalDate date,
+                                         User manager,
+                                         UUID bluetoothIdentifier,
                                          List<User> users,
-                                         List<Point> points,
-                                         Event event) {
+                                         List<Point> points) {
 
     public static PointRegistration dataTransferObjectToEntity(CreatePointRegistrationDTO dto) {
         PointRegistration pointRegistrationEntity = new PointRegistration();
 
         pointRegistrationEntity.setId(dto.id);
-        pointRegistrationEntity.setDate(dto.date());
-        pointRegistrationEntity.setUsers(dto.users());
-        pointRegistrationEntity.setPoints(dto.points());
-        pointRegistrationEntity.setEvent(dto.event());
+        pointRegistrationEntity.setEvent(dto.event);
+        pointRegistrationEntity.setDate(dto.date);
+        pointRegistrationEntity.setManager(dto.manager);
+        pointRegistrationEntity.setBluetoothIdentifier(dto.bluetoothIdentifier);
+        pointRegistrationEntity.setUsers(dto.users);
+        pointRegistrationEntity.setPoints(dto.points);
 
         return pointRegistrationEntity;
     }

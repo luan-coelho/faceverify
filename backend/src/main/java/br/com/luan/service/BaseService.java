@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseService<T, ID, R extends BaseRepository<T, ID>> {
 
@@ -17,7 +18,13 @@ public abstract class BaseService<T, ID, R extends BaseRepository<T, ID>> {
     }
 
     public T findById(ID id) {
-        return repository.findByIdOptional(id).orElseThrow(() -> new NotFoundException("Resource not found by id"));
+        return repository
+                .findByIdOptional(id)
+                .orElseThrow(() -> new NotFoundException("Resource not found by id"));
+    }
+
+    public Optional<T> findByIdOptional(ID id) {
+        return repository.findByIdOptional(id);
     }
 
     @Transactional

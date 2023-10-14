@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -29,6 +30,13 @@ public class PointRegistration {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
+
+    @JoinColumn(name = "manager_id")
+    @ManyToOne
+    private User manager;
+
+    @Column(name = "bluetooth_identifier")
+    private UUID bluetoothIdentifier;
 
     @OneToMany(mappedBy = "pointRegistration", cascade = CascadeType.ALL)
     private List<Point> points;

@@ -83,6 +83,11 @@ class WiFiFactor {
     + void validate()
 }
 
+class BluetoothFactor {
+    - id: Long
+    + void validate()
+}
+
 Environment "1" *-> "*" Event
 Environment "1" *-down-> "*" WifiNetwork
 Event "1" *-> "*" PointRegistration
@@ -93,9 +98,11 @@ PointRegistration "*" o-> "*" Factor
 
 Factor <|-- FaceRecognitionFactor
 Factor <|-- GeolocationFactor
-Factor <|-- WiFiFactor
+Factor <|-right- WiFiFactor
+Factor <|-- BluetoothFactor
 
 WiFiFactor "*" --> "*" WifiNetwork
+BluetoothFactor "*" --> "*" Device
 
 User "*" o-left-> "*" Role
 User "1" o-down-> "*" Device

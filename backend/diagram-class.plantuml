@@ -28,6 +28,7 @@ class StorageType {
 
 class Role {
     - name: String
+    - description: String
 }
 
 class Event {
@@ -57,11 +58,8 @@ class Environment {
     - description: String
 }
 
-class Configuration {
+class WifiNetwork {
     - id: Long
-}
-
-class WifiNetworkConfiguration {
     - ssid: String
     - ip: String
 }
@@ -73,6 +71,10 @@ class FaceRecognitionFactor {
 
 class GeolocationFactor {
     - id: Long
+    - latitude: Double
+    - longitude: Double
+    - accuracy: Float
+    - allowedRadius: Float
     + void validate()
 }
 
@@ -82,23 +84,23 @@ class WiFiFactor {
 }
 
 Environment "1" *-> "*" Event
-Environment "1" *-down-> "*" Configuration
-Configuration "1" *-down-> "*" WifiNetworkConfiguration
+Environment "1" *-down-> "*" WifiNetwork
 Event "1" *-> "*" PointRegistration
 
-PointRegistration "1" *-> "*" Point
+PointRegistration "1" *-up-> "*" Point
 PointRegistration "*" o-down-> "*" User
 PointRegistration "*" o-> "*" Factor
-PointRegistration "*" --> "*" WifiNetworkConfiguration
 
 Factor <|-- FaceRecognitionFactor
 Factor <|-- GeolocationFactor
 Factor <|-- WiFiFactor
 
+WiFiFactor "*" --> "*" WifiNetwork
+
 User "*" o-left-> "*" Role
 User "1" o-down-> "*" Device
 User "1" *-down-> "1" FacePhoto
 
-FacePhoto "*" *-> "1" StorageType
+FacePhoto "*" *-down-> "1" StorageType
 
 @enduml

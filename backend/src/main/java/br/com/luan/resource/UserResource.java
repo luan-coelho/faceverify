@@ -8,11 +8,19 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 import org.jboss.resteasy.reactive.RestPath;
 
+import java.util.List;
+
 @Path("/user")
 public class UserResource {
 
     @Inject
     UserService service;
+
+    @GET
+    public Response getAll() {
+        List<User> users = service.findAll();
+        return Response.ok(users).build();
+    }
 
     @Path("/{id}")
     @GET

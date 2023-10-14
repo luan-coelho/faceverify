@@ -1,5 +1,6 @@
 package br.com.luan.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +19,11 @@ public class Event {
     @SequenceGenerator(name = "event_seq", sequenceName = "event_seq", allocationSize = 1)
     @Column(name = "event_id")
     private Long id;
+
     @Column(name = "description")
     private String description;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "event")
     private List<PointRegistration> pointRegistrations;
 }

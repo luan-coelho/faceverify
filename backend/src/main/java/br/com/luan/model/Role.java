@@ -16,6 +16,7 @@ public class Role {
     @SequenceGenerator(name = "role_seq", sequenceName = "role_seq", allocationSize = 1)
     @Column(name = "role_id")
     private Long id;
+
     @Column(name = "description")
     private String description;
 }

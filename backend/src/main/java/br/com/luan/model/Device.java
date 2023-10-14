@@ -20,8 +20,10 @@ public class Device{
     @Column(name = "device_id")
     private Long id;
     private String name;
+
     @Column(name = "bluetooth_identifier")
     private UUID bluetoothIdentifier;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")

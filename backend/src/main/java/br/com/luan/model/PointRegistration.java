@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 
 @Data
@@ -22,6 +21,7 @@ public class PointRegistration {
     @Column(name = "point_registration_id")
     private Long id;
     private LocalDate date;
+
     @ManyToMany
     @JoinTable(
             name = "point_registration_user",
@@ -29,8 +29,10 @@ public class PointRegistration {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
-    @OneToMany(mappedBy = "pointRegistration")
+
+    @OneToMany(mappedBy = "pointRegistration", cascade = CascadeType.ALL)
     private List<Point> points;
+
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;

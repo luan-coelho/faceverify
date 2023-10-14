@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
-public class DeviceService extends BaseService<Device, Long, DeviceRepository> {
+public class RoleService extends BaseService<Device, Long, DeviceRepository> {
 
     public Device findByBluetoothIdentifier(UUID bluetoothIdentifier) {
         return this.repository.findByBluetoothIdentifier(bluetoothIdentifier);

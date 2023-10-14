@@ -43,6 +43,7 @@ class PointRegistration {
 class Point {
     - id: Long
     - dateTime: LocalDateTime
+    - durationInMinutes: int
     - validated: boolean
 }
 

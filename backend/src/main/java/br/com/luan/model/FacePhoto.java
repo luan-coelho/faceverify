@@ -17,8 +17,10 @@ public class FacePhoto {
     @SequenceGenerator(name = "facephoto_seq", sequenceName = "facephoto_seq", allocationSize = 1)
     @Column(name = "face_photo_id")
     private Long id;
+
     @Transient
     private String url;
+
     @Transient
     @Enumerated(EnumType.ORDINAL)
     private StorageType storageType;

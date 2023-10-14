@@ -12,6 +12,3 @@ VALUES (DEFAULT, 'Dispositivo do Usuário', 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a1
 
 INSERT INTO event(event_id, description)
 VALUES (DEFAULT, 'Labin IV');
-
-INSERT INTO point_registration(point_registration_id, date, event_id)
-VALUES (DEFAULT, now(), (SELECT last_value FROM event_seq))

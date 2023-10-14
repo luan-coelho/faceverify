@@ -23,11 +23,14 @@ public class User {
     private String email;
     private String cpf;
     private String password;
+
     @OneToMany(mappedBy = "user")
     private List<Device> devices;
+
     @OneToOne
     @JoinColumn(name = "face_photo")
     private FacePhoto facePhoto;
+
     @ManyToMany
     @JoinTable(
             name = "user_role",

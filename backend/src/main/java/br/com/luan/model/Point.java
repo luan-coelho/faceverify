@@ -1,5 +1,6 @@
 package br.com.luan.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +19,12 @@ public class Point {
     @SequenceGenerator(name = "point_seq", sequenceName = "point_seq", allocationSize = 1)
     @Column(name = "point_id")
     private Long id;
+
     @Column(name = "date_time")
     private LocalDateTime dateTime;
+    private int durationInMinutes;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "point_registration_id")
     private PointRegistration pointRegistration;

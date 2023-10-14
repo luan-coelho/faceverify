@@ -1,9 +1,10 @@
 package br.com.luan.repository;
 
-import br.com.luan.model.User;
+import br.com.luan.model.Event;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class UserRepository extends BaseRepository<User, Long> {
+public class EventRepository extends BaseRepository<Event, Long> {
+
 }
 

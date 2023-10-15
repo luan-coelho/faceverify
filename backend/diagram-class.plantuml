@@ -15,20 +15,35 @@ class Device {
     - name: String
 }
 
-class FacePhoto {
-    - id: Long
-    - url: String
+abstract class UserFacePhoto {
+    - file: File
+    - mimeType: String
+    - fileSize: long
+    - fileName: String
+    - uploadDate: Date
 }
 
-class StorageType {
-    + LOCAL
-    + S3
-    + OTHER
+class LocalUserFacePhoto {
+    - filePath: String
 }
 
-class Role {
-    - name: String
-    - description: String
+class S3UserFacePhoto {
+    - bucketName: String
+    - objectKey: String
+}
+
+class AzureUserFacePhoto {
+    - containerName: String
+}
+
+class GCloudUserFacePhoto {
+    - bucketName: String
+    - objectName: String
+}
+
+enum Role {
+    - MANAGER: int
+    - USER: int
 }
 
 class Event {
@@ -36,14 +51,14 @@ class Event {
     - description: String
 }
 
-class PointRegistration {
+class RegistrationPoint {
     - id: Long
     - date: LocalDate
 }
 
 class Point {
     - id: Long
-    - dateTime: LocalDateTime
+    - initialTime: LocalTime
     - durationInMinutes: int
     - validated: boolean
 }
@@ -56,12 +71,6 @@ class Environment {
     - id: Long
     - title: String
     - description: String
-}
-
-class WifiNetwork {
-    - id: Long
-    - ssid: String
-    - ip: String
 }
 
 class FaceRecognitionFactor {
@@ -78,36 +87,34 @@ class GeolocationFactor {
     + void validate()
 }
 
-class WiFiFactor {
-    - id: Long
-    + void validate()
-}
-
 class BluetoothFactor {
     - id: Long
     + void validate()
 }
 
-Environment "1" *-> "*" Event
-Environment "1" *-down-> "*" WifiNetwork
-Event "1" *-> "*" PointRegistration
+RegistrationPoint "*" --> "1" Event
+Event "*" --> "1" Environment
+Environment "1" *-> "1" User
+Event "*" --> "*" User : "users"
+Event "*" --> "1" User : "manager"
 
-PointRegistration "1" *-up-> "*" Point
-PointRegistration "*" o-down-> "*" User
-PointRegistration "*" o-> "*" Factor
+RegistrationPoint "1" *-down-> "*" Point
+RegistrationPoint "*" o-> "*" Factor
 
 Factor <|-- FaceRecognitionFactor
 Factor <|-- GeolocationFactor
-Factor <|-right- WiFiFactor
 Factor <|-- BluetoothFactor
 
-WiFiFactor "*" --> "*" WifiNetwork
-BluetoothFactor "*" --> "*" Device
+GeolocationFactor "*" --> "1" User
+BluetoothFactor "*" o-left-> "1" Device
 
-User "*" o-left-> "*" Role
-User "1" o-down-> "*" Device
-User "1" *-down-> "1" FacePhoto
+User "*" o-down-> "*" Role
+User "1" o-> "*" Device
+User "1" *-down-> "1" UserFacePhoto
 
-FacePhoto "*" *-down-> "1" StorageType
+UserFacePhoto <|-- LocalUserFacePhoto
+UserFacePhoto <|-- S3UserFacePhoto
+UserFacePhoto <|-- AzureUserFacePhoto
+UserFacePhoto <|-- GCloudUserFacePhoto
 
 @enduml

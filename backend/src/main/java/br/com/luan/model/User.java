@@ -1,41 +1,23 @@
 package br.com.luan.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.List;
-
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_user")
 @Entity
-public class User {
+class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
-    @Column(name = "user_id")
     private Long id;
     private String name;
     private String email;
     private String cpf;
     private String password;
-
-    @OneToMany(mappedBy = "user")
-    private List<Device> devices;
-
-    @OneToOne
-    @JoinColumn(name = "face_photo")
-    private FacePhoto facePhoto;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> roles;
 }

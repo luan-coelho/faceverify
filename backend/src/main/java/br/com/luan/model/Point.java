@@ -1,32 +1,27 @@
 package br.com.luan.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import java.time.LocalTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
-
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Point {
+class Point {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_seq")
-    @SequenceGenerator(name = "point_seq", sequenceName = "point_seq", allocationSize = 1)
-    @Column(name = "point_id")
     private Long id;
-
-    @Column(name = "date_time")
-    private LocalDateTime dateTime;
-    private int durationInMinutes;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "point_registration_id")
-    private PointRegistration pointRegistration;
+    private LocalTime startTime;
+    private int minutesToValidate;
     private boolean validated;
+    @ManyToOne
+    private PointRecord pointRecord;
 }

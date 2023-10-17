@@ -9,65 +9,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    appBar(height) => PreferredSize(
-          preferredSize: Size(MediaQuery.of(context).size.width, height + 80),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                // Background
-                color: Theme.of(context).primaryColor,
-                height: height + 75,
-                width: MediaQuery.of(context).size.width, // Background
-                child: const Center(
-                  child: Text(
-                    "Home",
-                    style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-
-              Container(), // Required some widget in between to float AppBar
-
-              Positioned(
-                // To take AppBar Size only
-                top: 100.0,
-                left: 20.0,
-                right: 20.0,
-                child: AppBar(
-                  backgroundColor: Colors.white,
-                  leading: Icon(
-                    Icons.menu,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  primary: false,
-                  title: const TextField(
-                      decoration: InputDecoration(
-                          hintText: "Search",
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(color: Colors.grey))),
-                  actions: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.search,
-                          color: Theme.of(context).primaryColor),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.notifications,
-                          color: Theme.of(context).primaryColor),
-                      onPressed: () {},
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        );
-
     return Scaffold(
-      appBar: appBar(AppBar().preferredSize.height),
+      appBar: AppBar(title: const Text("Validação")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -88,8 +31,9 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 200,
               child: ListView.separated(
+                padding: const EdgeInsets.only(top: 8),
                 separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(width: 10);
+                  return const SizedBox(width: 12);
                 },
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,

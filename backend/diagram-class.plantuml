@@ -1,5 +1,5 @@
 @startuml
-title Diagrama de classe do backend da aplicação
+title Backend Application Class Diagram
 
 class User {
     - id: Long
@@ -9,20 +9,20 @@ class User {
     - password: String
 }
 
-class Manager {
+class Administrator {
     - id: Long
-    - createAt: LocalDate
+    - creationDate: LocalDate
 }
 
 class Participant {
     - id: Long
-    - createAt: LocalDate
+    - creationDate: LocalDate
 }
 
 class Device {
     - id: Long
-    - identifier: UUID
-    - name: String
+    - bluetoothIdentifier: UUID
+    - description: String
 }
 
 abstract class UserFacePhoto {
@@ -37,8 +37,6 @@ abstract class UserFacePhoto {
 class UsedFactor {
      - id: Long
 }
-
-class Inscricao
 
 class LocalUserFacePhoto {
     - filePath: String
@@ -69,71 +67,70 @@ class Event {
     - description: String
 }
 
-class RegistrationPoint {
+class Location {
+    - id: Long
+    - latitude: Double
+    - longitude: Double
+}
+
+
+class PointRecord {
     - id: Long
     - date: LocalDate
 }
 
 class Point {
     - id: Long
-    - initialTime: LocalTime
-    - durationInMinutes: int
+    - startTime: LocalTime
+    - minutesToValidate: int
     - validated: boolean
 }
 
-class RegistroPresenca {
+class AttendanceRecord {
     - id: Long
-    - datetime: LocalDateTime
+    - dateTime: LocalDateTime
 }
 
-abstract class Factor {
+interface Factor {
     + void {abstract} validate()
 }
 
-class FaceRecognitionFactor {
+class FacialRecognitionFactor {
     - id: Long
     + void validate()
 }
 
-class GeolocationFactor {
+class IndoorLocationFactor {
     - id: Long
-    - latitude: Double
-    - longitude: Double
-    - accuracy: Float
-    - allowedRadius: Float
+    - permittedRadiusInMeters: Float
     + void validate()
 }
 
-class BluetoothFactor {
-    - id: Long
-    + void validate()
-}
-
-RegistrationPoint "*" --> "1" Event
+PointRecord "*" --> "1" Event
 Event "*" --> "1" Environment
-Environment "1" *-> "1" Manager
-Event "*" --> "*" Manager
+Environment "1" *-> "1" Administrator
+Event "*" --> "*" Administrator
+Event "1" --> "1" Location
 
-RegistrationPoint "1" *-down-> "*" Point
-RegistrationPoint "*" o-> "*" Factor
+PointRecord "1" *-> "*" Point
+PointRecord "*" o-> "*" Factor
 
-RegistroPresenca "*" o-> "1" Participant
-RegistroPresenca "*" o-> "1" Point
+AttendanceRecord "*" o-> "1" Participant
+AttendanceRecord "*" o-> "1" Point
+AttendanceRecord "1" o-> "1" UserFacePhoto
 
-Factor <|-- FaceRecognitionFactor
-Factor <|-- GeolocationFactor
-Factor <|-- BluetoothFactor
+Factor <|-- FacialRecognitionFactor
+Factor <|-- IndoorLocationFactor
 
-GeolocationFactor "*" --> "1" Manager
-BluetoothFactor "*" o-left-> "1" Device
+IndoorLocationFactor "*" o-> "1" Device
 
 User "1" o-> "*" Device
-User "1" *-down-> "1" UserFacePhoto
+User "1" *-> "1" UserFacePhoto
 
-RegistroPresenca "1" *-> "*" UsedFactor
+AttendanceRecord "1" *-> "*" UsedFactor
 UsedFactor "1" --> "1" Factor
 
-Manager "1" --> "1" User
+Administrator "1" --> "1" User
 Participant "1" --> "1" User
 
 UserFacePhoto <|-- LocalUserFacePhoto

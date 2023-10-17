@@ -9,6 +9,16 @@ class User {
     - password: String
 }
 
+class Manager {
+    - id: Long
+    - createAt: LocalDate
+}
+
+class Participant {
+    - id: Long
+    - createAt: LocalDate
+}
+
 class Device {
     - id: Long
     - identifier: UUID
@@ -16,12 +26,19 @@ class Device {
 }
 
 abstract class UserFacePhoto {
+    - id: Long
     - file: File
     - mimeType: String
     - fileSize: long
     - fileName: String
     - uploadDate: Date
 }
+
+class UsedFactor {
+     - id: Long
+}
+
+class Inscricao
 
 class LocalUserFacePhoto {
     - filePath: String
@@ -41,9 +58,10 @@ class GCloudUserFacePhoto {
     - objectName: String
 }
 
-enum Role {
-    - MANAGER: int
-    - USER: int
+class Environment {
+    - id: Long
+    - title: String
+    - description: String
 }
 
 class Event {
@@ -63,14 +81,13 @@ class Point {
     - validated: boolean
 }
 
-abstract class Factor {
-    + void {abstract} validate()
+class RegistroPresenca {
+    - id: Long
+    - datetime: LocalDateTime
 }
 
-class Environment {
-    - id: Long
-    - title: String
-    - description: String
+abstract class Factor {
+    + void {abstract} validate()
 }
 
 class FaceRecognitionFactor {
@@ -94,23 +111,30 @@ class BluetoothFactor {
 
 RegistrationPoint "*" --> "1" Event
 Event "*" --> "1" Environment
-Environment "1" *-> "1" User
-Event "*" --> "*" User : "users"
-Event "*" --> "1" User : "manager"
+Environment "1" *-> "1" Manager
+Event "*" --> "*" Manager
 
 RegistrationPoint "1" *-down-> "*" Point
 RegistrationPoint "*" o-> "*" Factor
+
+RegistroPresenca "*" o-> "1" Participant
+RegistroPresenca "*" o-> "1" Point
 
 Factor <|-- FaceRecognitionFactor
 Factor <|-- GeolocationFactor
 Factor <|-- BluetoothFactor
 
-GeolocationFactor "*" --> "1" User
+GeolocationFactor "*" --> "1" Manager
 BluetoothFactor "*" o-left-> "1" Device
 
-User "*" o-down-> "*" Role
 User "1" o-> "*" Device
 User "1" *-down-> "1" UserFacePhoto
+
+RegistroPresenca "1" *-> "*" UsedFactor
+UsedFactor "1" --> "1" Factor
+
+Manager "1" --> "1" User
+Participant "1" --> "1" User
 
 UserFacePhoto <|-- LocalUserFacePhoto
 UserFacePhoto <|-- S3UserFacePhoto

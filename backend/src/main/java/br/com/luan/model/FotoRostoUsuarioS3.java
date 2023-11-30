@@ -11,7 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class AzureUserFacePhoto extends UserFacePhoto {
+class FotoRostoUsuarioS3 extends FotoRostoUsuario {
 
-    private String containerName;
+    private String nomeBucket;
+    private String chaveObjeto;
 }

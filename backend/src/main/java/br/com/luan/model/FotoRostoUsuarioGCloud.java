@@ -1,10 +1,6 @@
 package br.com.luan.model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class Participant {
+class FotoRostoUsuarioGCloud extends FotoRostoUsuario {
 
-    @Id
-    private Long id;
-    private LocalDate creationDate;
-    @OneToOne
-    private User user;
+    private String nomeBucket;
+    private String chaveObjeto;
 }

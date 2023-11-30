@@ -1,10 +1,7 @@
 package br.com.luan.model;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +12,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class AttendanceRecord {
+class FatorLocalizacaoInterna extends Fator {
 
     @Id
     private Long id;
-    private LocalDateTime dateTime;
-    @ManyToOne
-    private Participant participant;
-    @ManyToOne
-    private Point point;
+    private Float raioPermitidoEmMetros;
+
 }

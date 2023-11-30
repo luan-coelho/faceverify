@@ -1,6 +1,8 @@
 package br.com.luan.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +13,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class GCloudUserFacePhoto extends UserFacePhoto {
+class Localizacao {
 
-    private String bucketName;
-    private String objectName;
+    @Id
+    private Long id;
+    private Double latitude;
+    private Double longitude;
+    @OneToOne
+    private Evento evento;
 }

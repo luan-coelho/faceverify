@@ -15,11 +15,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class Administrator {
+class Administrador {
 
     @Id
     private Long id;
-    private LocalDate creationDate;
+    private LocalDate dataCriacao;
     @OneToOne
-    private User user;
+    private Usuario usuario;
 }

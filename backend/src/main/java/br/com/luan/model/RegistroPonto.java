@@ -17,15 +17,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class PointRecord {
+class RegistroPonto {
 
     @Id
     private Long id;
-    private LocalDate date;
+    private LocalDate data;
     @ManyToOne
-    private Event event;
-    @OneToMany(mappedBy = "pointRecord")
-    private List<Point> points;
-    @OneToMany(mappedBy = "pointRecord")
-    private List<Factor> factors;
+    private Evento evento;
+    @OneToMany(mappedBy = "registroPonto")
+    private List<Ponto> pontos;
+    @OneToMany(mappedBy = "registroPonto")
+    private List<Fator> fatores;
 }

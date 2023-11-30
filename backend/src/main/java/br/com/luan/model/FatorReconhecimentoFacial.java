@@ -1,6 +1,7 @@
 package br.com.luan.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class LocalUserFacePhoto extends UserFacePhoto {
+class FatorReconhecimentoFacial extends Fator {
 
-    private String filePath;
+    @Id
+    private Long id;
+
 }

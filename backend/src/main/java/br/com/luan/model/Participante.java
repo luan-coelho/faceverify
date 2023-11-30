@@ -1,8 +1,10 @@
 package br.com.luan.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +15,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-abstract class Factor {
+class Participante {
 
     @Id
     private Long id;
-    @ManyToOne
-    private PointRecord pointRecord;
-
-    abstract void validate();
+    private LocalDate dataCriacao;
+    @OneToOne
+    private Usuario usuario;
 }

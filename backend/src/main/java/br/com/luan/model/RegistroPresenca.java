@@ -1,29 +1,27 @@
 package br.com.luan.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class User {
+class RegistroPresenca {
 
     @Id
     private Long id;
-    private String name;
-    private String email;
-    private String cpf;
-    private String password;
-    @OneToMany(mappedBy = "user")
-    private List<Device> devices;
-    private boolean completeRegistration;
+    private LocalDateTime dataHora;
+    @ManyToOne
+    private Participante participante;
+    @ManyToOne
+    private Ponto ponto;
 }

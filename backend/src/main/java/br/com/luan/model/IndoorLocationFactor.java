@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class IndoorLocationFactor implements Factor {
+class IndoorLocationFactor extends Factor {
 
     @Id
     private Long id;

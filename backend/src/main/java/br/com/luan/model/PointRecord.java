@@ -26,4 +26,6 @@ class PointRecord {
     private Event event;
     @OneToMany(mappedBy = "pointRecord")
     private List<Point> points;
+    @OneToMany(mappedBy = "pointRecord")
+    private List<Factor> factors;
 }

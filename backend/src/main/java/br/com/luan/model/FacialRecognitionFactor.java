@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class FacialRecognitionFactor implements Factor {
+class FacialRecognitionFactor extends Factor {
 
     @Id
     private Long id;

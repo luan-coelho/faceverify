@@ -61,6 +61,11 @@ class Evento {
     - permitirSolicitacoesIngresso: boolean
 }
 
+class SolicitacaoIngresso {
+    - id: Long
+    - codigo: String
+}
+
 class Localizacao {
     - id: Long
     - latitude: Double
@@ -105,6 +110,7 @@ RegistroPonto "*" --> "1" Evento
 Evento "*" --> "*" Administrador
 Evento "1" --> "1" Localizacao
 Evento "*" --> "*" Participante
+SolicitacaoIngresso --> Evento
 
 RegistroPonto "1" *-> "*" Ponto
 RegistroPonto "*" o-> "*" Fator

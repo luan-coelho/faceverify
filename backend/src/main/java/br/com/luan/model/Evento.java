@@ -25,5 +25,6 @@ public class Evento {
     private Localizacao localizacao;
     @ManyToMany
     private List<Participante> participantes;
+    private String codigo;
     private boolean permitirSolicitacoesIngresso;
 }

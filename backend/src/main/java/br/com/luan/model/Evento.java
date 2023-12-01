@@ -1,9 +1,6 @@
 package br.com.luan.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +22,7 @@ class Evento {
     private List<RegistroPonto> registrosPonto;
     @OneToOne
     private Localizacao localizacao;
+    @ManyToMany
+    private List<Participante> participantes;
+    private boolean permitirSolicitacoes;
 }

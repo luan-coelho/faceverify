@@ -58,6 +58,7 @@ class FotoRostoUsuarioGCloud {
 class Evento {
     - id: Long
     - descricao: String
+    - permitirSolicitacoes: boolean
 }
 
 class Localizacao {
@@ -70,6 +71,7 @@ class Localizacao {
 class RegistroPonto {
     - id: Long
     - data: LocalDate
+    - emAndamento: boolean
 }
 
 class Ponto {
@@ -102,6 +104,7 @@ class FatorLocalizacaoInterna {
 RegistroPonto "*" --> "1" Evento
 Evento "*" --> "*" Administrador
 Evento "1" --> "1" Localizacao
+Evento "*" --> "*" Participante
 
 RegistroPonto "1" *-> "*" Ponto
 RegistroPonto "*" o-> "*" Fator

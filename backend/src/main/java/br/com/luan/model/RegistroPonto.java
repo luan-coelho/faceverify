@@ -1,8 +1,5 @@
 package br.com.luan.model;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -11,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,4 +28,5 @@ class RegistroPonto {
     private List<Ponto> pontos;
     @OneToMany(mappedBy = "registroPonto")
     private List<Fator> fatores;
+    private boolean emAndamento;
 }

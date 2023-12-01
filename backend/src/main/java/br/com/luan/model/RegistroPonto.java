@@ -1,9 +1,6 @@
 package br.com.luan.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,9 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class RegistroPonto {
+public class RegistroPonto {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private LocalDate data;
     @ManyToOne

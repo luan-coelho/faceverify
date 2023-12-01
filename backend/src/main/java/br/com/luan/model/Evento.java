@@ -13,16 +13,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class Evento {
+public class Evento {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String descricao;
     @OneToMany(mappedBy = "evento")
     private List<RegistroPonto> registrosPonto;
-    @OneToOne
+    @OneToOne(mappedBy = "evento")
     private Localizacao localizacao;
     @ManyToMany
     private List<Participante> participantes;
-    private boolean permitirSolicitacoes;
+    private boolean permitirSolicitacoesIngresso;
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class FotoRostoUsuarioAzure extends FotoRostoUsuario {
+public class FotoRostoUsuarioAzure extends FotoRostoUsuario {
 
     private String nomeContainer;
 }

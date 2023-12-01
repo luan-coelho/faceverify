@@ -58,7 +58,7 @@ class FotoRostoUsuarioGCloud {
 class Evento {
     - id: Long
     - descricao: String
-    - permitirSolicitacoes: boolean
+    - permitirSolicitacoesIngresso: boolean
 }
 
 class Localizacao {

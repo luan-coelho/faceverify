@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class FotoRostoUsuarioLocal extends FotoRostoUsuario {
+public class FotoRostoUsuarioLocal extends FotoRostoUsuario {
 
     private String caminhoArquivo;
 }

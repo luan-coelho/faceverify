@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class FotoRostoUsuarioGCloud extends FotoRostoUsuario {
+public class FotoRostoUsuarioGCloud extends FotoRostoUsuario {
 
     private String nomeBucket;
     private String chaveObjeto;

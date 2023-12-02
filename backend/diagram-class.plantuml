@@ -64,10 +64,18 @@ class Evento {
 class SolicitacaoIngresso {
     - id: Long
     - codigo: String
+    - dataHoraLimite: LocalDateTime
+}
+
+enum SituacaoSolicitacao {
+    + PENDENTE
+    + APROVADA
+    + REJEITADA
 }
 
 class Localizacao {
     - id: Long
+    - descricao: String
     - latitude: Double
     - longitude: Double
 }
@@ -108,9 +116,10 @@ class FatorLocalizacaoInterna {
 
 RegistroPonto "*" --> "1" Evento
 Evento "*" --> "*" Administrador
-Evento "1" --> "1" Localizacao
+Evento "1" --> "*" Localizacao
 Evento "*" --> "*" Participante
-SolicitacaoIngresso --> Evento
+SolicitacaoIngresso "*" o-> "1" Evento
+SolicitacaoIngresso "*" o-down-> "1" SituacaoSolicitacao
 
 RegistroPonto "1" *-> "*" Ponto
 RegistroPonto "*" o-> "*" Fator

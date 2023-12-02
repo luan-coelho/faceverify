@@ -21,10 +21,12 @@ public class Evento {
     private String descricao;
     @OneToMany(mappedBy = "evento")
     private List<RegistroPonto> registrosPonto;
-    @OneToOne(mappedBy = "evento")
-    private Localizacao localizacao;
+    @OneToMany(mappedBy = "evento")
+    private List<Localizacao> localizacoes;
     @ManyToMany
     private List<Participante> participantes;
     private String codigo;
     private boolean permitirSolicitacoesIngresso;
+    @OneToMany(mappedBy = "evento")
+    private List<SolicitacaoIngresso> solicitacoes;
 }

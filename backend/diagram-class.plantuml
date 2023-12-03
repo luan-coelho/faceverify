@@ -21,6 +21,7 @@ class Participante {
 class Dispositivo {
     - id: Long
     - identificadorBluetooth: UUID
+    - imei: String
     - descricao: String
 }
 
@@ -31,10 +32,6 @@ abstract class FotoRostoUsuario {
     - tamanhoArquivo: long
     - nomeArquivo: String
     - dataUpload: Date
-}
-
-class FatorUsado {
-     - id: Long
 }
 
 class FotoRostoUsuarioLocal {
@@ -80,7 +77,6 @@ class Localizacao {
     - longitude: Double
 }
 
-
 class RegistroPonto {
     - id: Long
     - data: LocalDate
@@ -99,47 +95,38 @@ class RegistroPresenca {
     - dataHora: LocalDateTime
 }
 
-abstract class Fator {
-    + void {abstract} validar()
-}
-
-class FatorReconhecimentoFacial {
-    - id: Long
-    + void validar()
-}
-
-class FatorLocalizacaoInterna {
+class RegistroPontoConfiguracao {
     - id: Long
     - raioPermitidoEmMetros: Float
-    + void validar()
+}
+
+enum Fator {
+    + RECONHECIMENTO_FACIAL
+    + LOCALIZACAO_INDOOR
 }
 
 RegistroPonto "*" --> "1" Evento
+RegistroPonto "1" o-> "1" RegistroPontoConfiguracao
+RegistroPonto "1" *-> "*" Ponto
+RegistroPonto "*" *-> "*" Fator
+
 Evento "*" --> "*" Administrador
 Evento "1" --> "*" Localizacao
 Evento "*" --> "*" Participante
-SolicitacaoIngresso "*" o-> "1" Evento
-SolicitacaoIngresso "*" o-down-> "1" SituacaoSolicitacao
 
-RegistroPonto "1" *-> "*" Ponto
-RegistroPonto "*" o-> "*" Fator
+SolicitacaoIngresso "*" o-> "1" Evento
+SolicitacaoIngresso "*" o-> "1" SituacaoSolicitacao
+SolicitacaoIngresso "*" o-> "1" Participante
 
 RegistroPresenca "*" o-> "1" Participante
 RegistroPresenca "*" o-> "1" Ponto
 RegistroPresenca "1" o-> "1" FotoRostoUsuario
 
-Fator <|-- FatorReconhecimentoFacial
-Fator <|-- FatorLocalizacaoInterna
-
-FatorLocalizacaoInterna "*" o-> "1" Dispositivo
-
 Usuario "1" o-> "*" Dispositivo
 Usuario "1" *-> "1" FotoRostoUsuario
 
-RegistroPresenca "1" *-> "*" FatorUsado
-FatorUsado "1" --> "1" Fator
-
 Administrador "1" --> "1" Usuario
+
 Participante "1" --> "1" Usuario
 
 FotoRostoUsuario <|-- FotoRostoUsuarioLocal

@@ -22,5 +22,7 @@ public class RegistroPresenca {
     @ManyToOne
     private Participante participante;
     @ManyToOne
+    private FotoRostoUsuario fotoRostoUsuario;
+    @ManyToOne
     private Ponto ponto;
 }

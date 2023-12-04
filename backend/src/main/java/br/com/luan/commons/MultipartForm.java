@@ -4,7 +4,7 @@ import jakarta.ws.rs.FormParam;
 
 import java.io.InputStream;
 
-public class MultipartBody {
+public class MultipartForm {
 
     @FormParam("file")
     public InputStream inputStream;

@@ -1,12 +1,12 @@
 package br.com.luan.model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -19,6 +19,7 @@ public class Administrador {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private LocalDate dataCriacao;
+    private boolean cadastroValidado;
     @OneToOne
     private Usuario usuario;
 }

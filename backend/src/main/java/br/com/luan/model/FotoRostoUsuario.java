@@ -1,13 +1,13 @@
 package br.com.luan.model;
 
-import java.io.File;
-import java.time.LocalDate;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.File;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -27,4 +27,9 @@ public abstract class FotoRostoUsuario {
     private LocalDate dataUpload;
     @OneToOne
     private Usuario usuario;
+
+    @PrePersist
+    public void gerarDataUploud(){
+        this.dataUpload = LocalDate.now();
+    }
 }

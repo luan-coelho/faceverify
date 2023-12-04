@@ -1,6 +1,7 @@
 package br.com.luan.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class Participante {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private LocalDate dataCriacao;
+    private boolean cadastroCompleto;
     @OneToOne
     private Usuario usuario;
 }

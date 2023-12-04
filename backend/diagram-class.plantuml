@@ -5,17 +5,18 @@ class Usuario {
     - email: String
     - cpf: String
     - senha: String
-    - registroCompleto: boolean
 }
 
 class Administrador {
     - id: Long
     - dataCriacao: LocalDate
+    - cadastroValidado: boolean
 }
 
 class Participante {
     - id: Long
     - dataCriacao: LocalDate
+    - cadastroCompleto: boolean
 }
 
 class Dispositivo {

@@ -27,5 +27,4 @@ public class Usuario {
     private FotoRostoUsuario fotoRostoUsuario;
     @OneToMany(mappedBy = "usuario")
     private List<Dispositivo> dispositivos;
-    private boolean cadastroCompleto;
 }

@@ -24,7 +24,6 @@ public class RegistroPonto {
     private Evento evento;
     @OneToMany(mappedBy = "registroPonto")
     private List<Ponto> pontos;
-    @OneToMany(mappedBy = "registroPonto")
     private List<Fator> fatores;
     private boolean emAndamento;
 }

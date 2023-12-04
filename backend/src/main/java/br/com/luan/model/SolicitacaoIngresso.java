@@ -22,6 +22,7 @@ public class SolicitacaoIngresso {
     private LocalDateTime dataHoraLimite;
     @ManyToOne
     private Evento evento;
-    @Enumerated(EnumType.ORDINAL)
     private SituacaoSolicitacao situacao;
+    @ManyToOne
+    private Participante participante;
 }

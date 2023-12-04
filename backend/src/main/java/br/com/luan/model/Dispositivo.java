@@ -19,6 +19,7 @@ public class Dispositivo {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private UUID identificadorBluetooth;
+    private String imei;
     private String descricao;
     @ManyToOne
     private Usuario usuario;

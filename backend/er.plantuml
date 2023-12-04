@@ -86,10 +86,6 @@ entity solicitacao_ingresso {
     * participante_id : BIGINT [FK]
 }
 
-entity situacao_solicitacao {
-    * nome : VARCHAR [PK]
-}
-
 entity localizacao {
     * id : BIGINT [PK]
     --
@@ -141,7 +137,6 @@ evento ||--|{ localizacao
 evento }|-- participante
 
 solicitacao_ingresso ||--o| evento
-solicitacao_ingresso ||--o| situacao_solicitacao
 solicitacao_ingresso ||--o| participante
 
 registro_presenca ||--o| participante

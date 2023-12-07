@@ -7,18 +7,6 @@ class Usuario {
     - senha: String
 }
 
-class Administrador {
-    - id: Long
-    - dataCriacao: LocalDate
-    - cadastroValidado: boolean
-}
-
-class Participante {
-    - id: Long
-    - dataCriacao: LocalDate
-    - cadastroCompleto: boolean
-}
-
 class Dispositivo {
     - id: Long
     - identificadorBluetooth: UUID
@@ -29,9 +17,6 @@ class Dispositivo {
 abstract class FotoRostoUsuario {
     - id: Long
     - arquivo: File
-    - tipoMime: String
-    - tamanhoArquivo: long
-    - nomeArquivo: String
     - dataUpload: Date
 }
 
@@ -107,28 +92,24 @@ enum Fator {
 }
 
 RegistroPonto "*" --> "1" Evento
-RegistroPonto "1" o-> "1" RegistroPontoConfiguracao
+RegistroPonto "1" *-> "1" RegistroPontoConfiguracao
 RegistroPonto "1" *-> "*" Ponto
-RegistroPonto "*" *-> "*" Fator
+RegistroPonto "*" o-left-> "*" Fator
 
-Evento "*" --> "*" Administrador
+Evento "*" --> "*" Usuario : Usuários
+Evento "*" --> "1" Usuario : Usuário administrador
 Evento "1" --> "*" Localizacao
-Evento "*" --> "*" Participante
 
-SolicitacaoIngresso "*" o-> "1" Evento
+SolicitacaoIngresso "*" --> "1" Evento
+SolicitacaoIngresso "*" --> "1" Usuario
 SolicitacaoIngresso "*" o-> "1" SituacaoSolicitacao
-SolicitacaoIngresso "*" o-> "1" Participante
 
-RegistroPresenca "*" o-> "1" Participante
+RegistroPresenca "*" o-left-> "1" Usuario
 RegistroPresenca "*" o-> "1" Ponto
 RegistroPresenca "1" o-> "1" FotoRostoUsuario
 
-Usuario "1" o-> "*" Dispositivo
-Usuario "1" *-> "1" FotoRostoUsuario
-
-Administrador "1" --> "1" Usuario
-
-Participante "1" --> "1" Usuario
+Usuario "1" o-down-> "*" Dispositivo
+Usuario "1" *-down-> "1" FotoRostoUsuario
 
 FotoRostoUsuario <|-- FotoRostoUsuarioLocal
 FotoRostoUsuario <|-- FotoRostoUsuarioS3

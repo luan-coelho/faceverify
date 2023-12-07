@@ -9,22 +9,6 @@ entity usuario {
     * senha : VARCHAR
 }
 
-entity administrador {
-    * id : BIGINT [PK]
-    --
-    * data_criacao : DATE
-    * cadastro_validado : BOOLEAN
-    * usuario_id : BIGINT [FK]
-}
-
-entity participante {
-    * id : BIGINT [PK]
-    --
-    * data_criacao : DATE
-    * cadastro_completo : BOOLEAN
-    * usuario_id : BIGINT [FK]
-}
-
 entity dispositivo {
     * id : BIGINT [PK]
     --
@@ -82,8 +66,8 @@ entity solicitacao_ingresso {
     * codigo : VARCHAR
     * data_hora_limite : TIMESTAMP
     * evento_id : BIGINT [FK]
-    * situacao_solicitacao : VARCHAR
-    * participante_id : BIGINT [FK]
+    * situacao_solicitacao : INTEGER
+    * usuario_id : BIGINT [FK]
 }
 
 entity localizacao {
@@ -117,7 +101,7 @@ entity registro_presenca {
     * id : BIGINT [PK]
     --
     * data_hora : TIMESTAMP
-    * participante_id : BIGINT [FK]
+    * usuario_id : BIGINT [FK]
     * ponto_id : BIGINT [FK]
     * foto_rosto_usuario_id : BIGINT [FK]
 }
@@ -132,22 +116,18 @@ registro_ponto ||--o{ evento
 registro_ponto ||--|| registro_ponto_configuracao
 registro_ponto ||--|{ ponto
 
-evento ||--|{ administrador
 evento ||--|{ localizacao
-evento }|-- participante
+evento }|-- usuario
 
 solicitacao_ingresso ||--o| evento
-solicitacao_ingresso ||--o| participante
+solicitacao_ingresso ||--o| usuario
 
-registro_presenca ||--o| participante
+registro_presenca ||--o| usuario
 registro_presenca ||--o| ponto
 registro_presenca ||--o| foto_rosto_usuario
 
 usuario ||--o{ dispositivo
 usuario ||--|{ foto_rosto_usuario
-
-administrador ||--|| usuario
-participante ||--|| usuario
 
 foto_rosto_usuario <|-- foto_rosto_usuario_local
 foto_rosto_usuario <|-- foto_rosto_usuario_s3

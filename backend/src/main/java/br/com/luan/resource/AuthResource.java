@@ -1,7 +1,7 @@
 package br.com.luan.resource;
 
-import br.com.luan.CriarParticipanteDTO;
-import br.com.luan.service.ParticipanteService;
+import br.com.luan.CriarUsuarioDTO;
+import br.com.luan.service.UsuarioService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -11,10 +11,10 @@ import jakarta.ws.rs.core.Response;
 public class AuthResource {
 
     @Inject
-    ParticipanteService participanteService;
+    UsuarioService usuarioService;
 
     @GET
-    public Response cadastrar(CriarParticipanteDTO participanteDTO) {
-        return Response.ok(participanteService.criar(participanteDTO)).build();
+    public Response cadastrar(CriarUsuarioDTO usuarioDTO) {
+        return Response.ok(usuarioService.criar(usuarioDTO)).build();
     }
 }

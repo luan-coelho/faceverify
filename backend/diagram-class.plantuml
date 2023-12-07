@@ -92,7 +92,7 @@ enum Fator {
 }
 
 RegistroPonto "*" --> "1" Evento
-RegistroPonto "1" *-> "1" RegistroPontoConfiguracao
+RegistroPonto "1" *-down-> "1" RegistroPontoConfiguracao
 RegistroPonto "1" *-> "*" Ponto
 RegistroPonto "*" o-left-> "*" Fator
 

@@ -23,8 +23,10 @@ public class Evento {
     private List<RegistroPonto> registrosPonto;
     @OneToMany(mappedBy = "evento")
     private List<Localizacao> localizacoes;
+    @ManyToOne
+    private Usuario administrador;
     @ManyToMany
-    private List<Participante> participantes;
+    private List<Usuario> usuarios;
     private String codigo;
     private boolean permitirSolicitacoesIngresso;
     @OneToMany(mappedBy = "evento")

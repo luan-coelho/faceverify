@@ -1,10 +1,9 @@
 package br.com.luan;
 
 import br.com.luan.commons.MultipartForm;
-import br.com.luan.model.Participante;
 import br.com.luan.model.Usuario;
 
-public record CriarParticipanteDTO(
+public record CriarUsuarioDTO(
         String nome,
         String sobreNome,
         String email,
@@ -12,15 +11,13 @@ public record CriarParticipanteDTO(
         String senha,
         MultipartForm multipartForm) {
 
-    public Participante dataTransferObjectToEntity(){
+    public Usuario dataTransferObjectToEntity(){
         Usuario usuario = new Usuario();
         usuario.setNome(this.nome());
         usuario.setSobreNome(this.sobreNome());
         usuario.setCpf(this.cpf());
         usuario.setEmail(this.email());
         usuario.setSenha(this.senha());
-        Participante participante = new Participante();
-        participante.setUsuario(usuario);
-        return participante;
+        return usuario;
     }
 }

@@ -24,5 +24,5 @@ public class SolicitacaoIngresso {
     private Evento evento;
     private SituacaoSolicitacao situacao;
     @ManyToOne
-    private Participante participante;
+    private Usuario usuario;
 }

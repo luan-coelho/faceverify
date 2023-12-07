@@ -20,7 +20,7 @@ public class RegistroPresenca {
     private Long id;
     private LocalDateTime dataHora;
     @ManyToOne
-    private Participante participante;
+    private Usuario usuario;
     @ManyToOne
     private FotoRostoUsuario fotoRostoUsuario;
     @ManyToOne

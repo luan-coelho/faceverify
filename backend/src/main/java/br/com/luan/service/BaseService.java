@@ -10,6 +10,7 @@ import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
+@SuppressWarnings({"CdiInjectionPointsInspection", "UnusedReturnValue"})
 public abstract class BaseService<T, R extends BaseRepository<T>> {
 
     @Inject
@@ -45,6 +46,6 @@ public abstract class BaseService<T, R extends BaseRepository<T>> {
 
     protected PaginacaoDados<T> construirPaginacaoDeDados(List<T> dados, Paginavel paginavel) {
         Paginacao paginacao = repository.construirPaginacao(paginavel);
-        return new PaginacaoDados(dados, paginacao);
+        return new PaginacaoDados<>(dados, paginacao);
     }
 }

@@ -25,32 +25,7 @@ entity foto_rosto_usuario {
     * tamanho_arquivo : BIGINT
     * nome_arquivo : VARCHAR
     * data_upload : TIMESTAMP
-}
-
-entity foto_rosto_usuario_local {
-    * id : BIGINT [PK]
-    --
     * caminho_arquivo : VARCHAR
-}
-
-entity foto_rosto_usuario_s3 {
-    * id : BIGINT [PK]
-    --
-    * nome_bucket : VARCHAR
-    * chave_objeto : VARCHAR
-}
-
-entity foto_rosto_usuario_azure {
-    * id : BIGINT [PK]
-    --
-    * nome_container : VARCHAR
-}
-
-entity foto_rosto_usuario_gcloud {
-    * id : BIGINT [PK]
-    --
-    * nome_bucket : VARCHAR
-    * nome_objeto : VARCHAR
 }
 
 entity evento {
@@ -106,14 +81,7 @@ entity registro_presenca {
     * foto_rosto_usuario_id : BIGINT [FK]
 }
 
-entity registro_ponto_configuracao {
-    * id : BIGINT [PK]
-    --
-    * raio_permitido_em_metros : REAL
-}
-
 registro_ponto ||--o{ evento
-registro_ponto ||--|| registro_ponto_configuracao
 registro_ponto ||--|{ ponto
 
 evento ||--|{ localizacao
@@ -128,10 +96,5 @@ registro_presenca ||--o| foto_rosto_usuario
 
 usuario ||--o{ dispositivo
 usuario ||--|{ foto_rosto_usuario
-
-foto_rosto_usuario <|-- foto_rosto_usuario_local
-foto_rosto_usuario <|-- foto_rosto_usuario_s3
-foto_rosto_usuario <|-- foto_rosto_usuario_azure
-foto_rosto_usuario <|-- foto_rosto_usuario_gcloud
 
 @enduml

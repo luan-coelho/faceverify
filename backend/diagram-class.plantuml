@@ -14,28 +14,11 @@ class Dispositivo {
     - descricao: String
 }
 
-abstract class FotoRostoUsuario {
+class FotoRostoUsuario {
     - id: Long
     - arquivo: File
     - dataUpload: Date
-}
-
-class FotoRostoUsuarioLocal {
     - caminhoArquivo: String
-}
-
-class FotoRostoUsuarioS3 {
-    - nomeBucket: String
-    - chaveObjeto: String
-}
-
-class FotoRostoUsuarioAzure {
-    - nomeContainer: String
-}
-
-class FotoRostoUsuarioGCloud {
-    - nomeBucket: String
-    - nomeObjeto: String
 }
 
 class Evento {
@@ -51,9 +34,9 @@ class SolicitacaoIngresso {
 }
 
 enum SituacaoSolicitacao {
-    + PENDENTE
-    + APROVADA
-    + REJEITADA
+    + PENDENTE: int
+    + APROVADA: int
+    + REJEITADA: int
 }
 
 class Localizacao {
@@ -67,6 +50,7 @@ class RegistroPonto {
     - id: Long
     - data: LocalDate
     - emAndamento: boolean
+    - raioPermitidoEmMetros: int
 }
 
 class Ponto {
@@ -81,23 +65,18 @@ class RegistroPresenca {
     - dataHora: LocalDateTime
 }
 
-class RegistroPontoConfiguracao {
-    - id: Long
-    - raioPermitidoEmMetros: Float
-}
-
 enum Fator {
-    + RECONHECIMENTO_FACIAL
-    + LOCALIZACAO_INDOOR
+    + RECONHECIMENTO_FACIAL: int
+    + LOCALIZACAO_INDOOR: int
 }
 
 RegistroPonto "*" --> "1" Evento
-RegistroPonto "1" *-down-> "1" RegistroPontoConfiguracao
 RegistroPonto "1" *-> "*" Ponto
 RegistroPonto "*" o-left-> "*" Fator
+RegistroPonto "*" o-left-> "1" Localizacao
 
-Evento "*" --> "*" Usuario : Usuários
-Evento "*" --> "1" Usuario : Usuário administrador
+Evento "*" --> "*" Usuario : usuarios
+Evento "*" --> "1" Usuario : usuarioAdministrador
 Evento "1" --> "*" Localizacao
 
 SolicitacaoIngresso "*" --> "1" Evento
@@ -111,9 +90,9 @@ RegistroPresenca "1" o-> "1" FotoRostoUsuario
 Usuario "1" o-down-> "*" Dispositivo
 Usuario "1" *-down-> "1" FotoRostoUsuario
 
-FotoRostoUsuario <|-- FotoRostoUsuarioLocal
-FotoRostoUsuario <|-- FotoRostoUsuarioS3
-FotoRostoUsuario <|-- FotoRostoUsuarioAzure
-FotoRostoUsuario <|-- FotoRostoUsuarioGCloud
+'FotoRostoUsuario <|-- FotoRostoUsuarioLocal
+'FotoRostoUsuario <|-- FotoRostoUsuarioS3
+'FotoRostoUsuario <|-- FotoRostoUsuarioAzure
+'FotoRostoUsuario <|-- FotoRostoUsuarioGCloud
 
 @enduml
